@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body{
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: yellowgreen;
+        }
+        .container-3{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 50vw;
+            justify-content: center;
+            padding: 20px;
+            margin: 10px auto;
+            align-items: center;
+            /* visibility: hidden; */
+        }
+        .container-1{
+            display: flex;
+            padding: 10px;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            gap: 10px;
+            /* align-items: center; */
+            width: 50vw;
+
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-1">
+        <h1>Matrix Calculator</h1>
+        <h3>Enter a number of column or row</h3>
+        <input type="number" id="input-1" min="2"  required >
+        
+        <button onclick="columnFound()">Enter</button>
+    </div>
+    <div id="idcontain" class="container-3">
+        <div id="main1div"></div>
+        <div id="main2div"></div>
+        <button onclick="sumFound()">Sum</button>
+        <br>
+        <span>=</span>
+        <div id="resultdiv"></div>
+    </div>
+    <script>
+        function columnFound(){
+            let inpFixed = document.querySelector("#input-1").value;
+            let main1Fixed = document.querySelector("#main1div") ;
+            let main2Fixed = document.querySelector("#main2div" );
+            let resultdiv = document.querySelector("#resultdiv");
+            main1Fixed.innerHTML = "" ;
+            main2Fixed.innerHTML = "" ;
+            resultdiv.innerHTML = "" ;
+            for(i = 0 ;i < inpFixed ; i++){
+                for(k = 0 ;k < inpFixed ; k++){
+                    main1Fixed.innerHTML += `<input type="number"  required min="0" max="100" id="m1-${i}-${k}" value='0'>`;
+                    main2Fixed.innerHTML += `<input type="number"  required min="0" max="100" id="m2-${i}-${k}" value='0'>`;
+                    resultdiv.innerHTML += `<input type="number" required min="0" max="100" id="resultdiv-${i}-${k}" value='0'>`;
+                }
+                main1Fixed.innerHTML += `<br>`;
+                main2Fixed.innerHTML += `<br>`;
+                resultdiv.innerHTML += `<br>`;
+            }
+        }
+        function sumFound(){
+            let inpFixed = document.querySelector("#input-1").value;
+            let matrix1 = [];
+            let matrix2 = [];
+             for(i = 0 ;i < inpFixed ; i++){
+                matrix1[i] = [] 
+                matrix2[i] = [] 
+                for(k = 0 ;k < inpFixed ; k++){
+                    matrix1[i][k] = Number(document.querySelector(`#m1-${i}-${k}`).value);
+                    matrix2[i][k] = Number(document.querySelector(`#m2-${i}-${k}`).value);
+        }
+    }
+    let result = sumMatrix(matrix1, matrix2);
+        for (let i = 0; i < result.length; i++){
+            for (let k = 0; k < result[i].length; k++) {
+                document.querySelector(`#resultdiv-${i}-${k}`).value = result[i][k];
+                
+            }      
+    }
+}
+
+    function sumMatrix(matrix1, matrix2){
+        let result = [];
+        for (let i = 0; i < matrix1.length; i++) {
+            result[i] =[];
+            for (let k = 0; k < matrix1[i].length; k++) {
+                result[i][k] = matrix1[i][k]+ matrix2[i][k];
+
+                
+                
+            } 
+            
+        }
+        return result
+    }
+        
+    </script>
+
+
+</body>
+</html>
